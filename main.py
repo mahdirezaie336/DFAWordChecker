@@ -29,6 +29,17 @@ class Machine:
                 raise ValueError('State ' + current_state + ' is not valid')
         return current_state in self.final_states
 
+    def __str__(self):
+        # tab_size = max([len(i) for i in self.all_states]) + 1
+        # alphabet = sorted(list(self.alphabet))
+        # states = sorted(list(self.all_states))
+        # print(tab_size * ' ', ' '.join(alphabet))
+        # for state in states:
+        #     for letter in alphabet:
+        #         print(self.transitions[state][letter], end=' ')
+        #     print()
+        return str(self.transitions)
+
 
 def test():
     machine1_all_states = {'S00', 'S01', 'S02'}
@@ -75,4 +86,44 @@ def test():
 
 if __name__ == '__main__':
 
-    test()
+    # Getting first machine from input
+    print('*******************')
+    print('First Machine:')
+    alphabet1 = input('    Enter alphabet letters for the first machine: ').split()
+    states1 = input('    Not enter name of all states for the first machine: ').split()
+    init_state1 = input('    Not enter name of initial state for the first machine: ')
+    final_states1 = input('    Not enter name of all final states for the first machine: ').split()
+    print('    Now enter rows of the machine table:')
+    print('_______________________________________________')
+    print('   ', ' '.join(alphabet1))
+    transitions1 = []
+    for state in states1:
+        next_states = input(state + ' ').split()
+        for i, letter in enumerate(alphabet1):
+            transitions1.append((state, letter, next_states[i]))
+    machine1 = Machine(set(states1), init_state1, set(final_states1), set(alphabet1), *transitions1)
+
+    # Getting second machine from input
+    print('*******************')
+    print('Second Machine:')
+    alphabet2 = input('    Enter alphabet letters for the second machine: ').split()
+    states2 = input('    Not enter name of all states for the second machine: ').split()
+    init_state2 = input('    Not enter name of initial state for the second machine: ')
+    final_states2 = input('    Not enter name of all final states for the second machine: ').split()
+    print('    Now enter rows of the machine table:')
+    print('_______________________________________________')
+    print('   ', ' '.join(alphabet2))
+    transitions2 = []
+    for state in states2:
+        next_states = input(state + ' ').split()
+        for i, letter in enumerate(alphabet2):
+            transitions2.append((state, letter, next_states[i]))
+    machine2 = Machine(set(states2), init_state2, set(final_states2), set(alphabet2), *transitions2)
+
+    while True:
+        word = input('Enter a word to check: ')
+        print()
+        print(word, 'in machine1:', word in machine1)
+        print(word, 'in machine2:', word in machine2)
+        print(word, 'in both machines:', word in machine1 and word in machine2)
+        print()
