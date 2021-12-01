@@ -30,58 +30,7 @@ class Machine:
         return current_state in self.final_states
 
     def __str__(self):
-        # tab_size = max([len(i) for i in self.all_states]) + 1
-        # alphabet = sorted(list(self.alphabet))
-        # states = sorted(list(self.all_states))
-        # print(tab_size * ' ', ' '.join(alphabet))
-        # for state in states:
-        #     for letter in alphabet:
-        #         print(self.transitions[state][letter], end=' ')
-        #     print()
         return str(self.transitions)
-
-
-def test():
-    machine1_all_states = {'S00', 'S01', 'S02'}
-    machine1_alphabet = {'a', 'b'}
-    machine1_init_state = 'S00'
-    machine1_final_states = {'S02'}
-    machine1_transitions = [('S00', 'a', 'S00'), ('S00', 'b', 'S01'),
-                            ('S01', 'a', 'S01'), ('S01', 'b', 'S02'),
-                            ('S02', 'a', 'S02'), ('S02', 'b', 'S00')]
-    #    v----------------b---------------
-    #   _______        _______        _______
-    #   | S00 | --b--> | S01 | --b--> |[S02]|
-    #   -------        -------        -------
-    #    ^-a--          ^-a--          ^-a--
-    # Accepts a word with at least two n(b) % 3 == 2
-    machine1 = Machine(machine1_all_states, machine1_init_state, machine1_final_states,
-                       machine1_alphabet, *machine1_transitions)
-
-    print('aaaabaabaa in machine 1:', 'aaaabaabaa' in machine1)
-    print('abaaaaa in machine 1:', 'abaaaaa' in machine1)
-
-    machine2_all_states = {'S00', 'S01'}
-    machine2_alphabet = {'a', 'b'}
-    machine2_init_state = 'S00'
-    machine2_final_states = {'S01'}
-    machine2_transitions = [('S00', 'a', 'S01'), ('S00', 'b', 'S00'),
-                            ('S01', 'a', 'S00'), ('S01', 'b', 'S01')]
-    #    v-b--          v-b--
-    #   _______        _______
-    #   | S00 | --a--> |[S01]|
-    #   -------        -------
-    #    ^--------a---------
-    # Accepts a word with at least one 'a'
-    machine2 = Machine(machine2_all_states, machine2_init_state, machine2_final_states,
-                       machine2_alphabet, *machine2_transitions)
-
-    print('aaaababaa in machine 2:', 'aaaababaa' in machine2)
-    print('abbbaba in machine 2:', 'abbbaba' in machine2)
-
-    # Testing two machines
-    s = 'aaaababaa'
-    print('aaaababaa in machine 1 and 2:', s in machine2 and s in machine1)
 
 
 if __name__ == '__main__':
