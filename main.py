@@ -1,4 +1,4 @@
-class NDFA:
+class Machine:
 
     def __init__(self, all_states: set['str'],
                  init_state: str,
@@ -30,7 +30,7 @@ class NDFA:
         return current_state in self.final_states
 
 
-def main():
+def test():
     machine1_all_states = {'S00', 'S01', 'S02'}
     machine1_alphabet = {'a', 'b'}
     machine1_init_state = 'S00'
@@ -44,8 +44,8 @@ def main():
     #   -------        -------        -------
     #    ^-a--          ^-a--          ^-a--
     # Accepts a word with at least two n(b) % 3 == 2
-    machine1 = NDFA(machine1_all_states, machine1_init_state, machine1_final_states,
-                    machine1_alphabet, *machine1_transitions)
+    machine1 = Machine(machine1_all_states, machine1_init_state, machine1_final_states,
+                       machine1_alphabet, *machine1_transitions)
 
     print('aaaabaabaa in machine 1:', 'aaaabaabaa' in machine1)
     print('abaaaaa in machine 1:', 'abaaaaa' in machine1)
@@ -62,8 +62,8 @@ def main():
     #   -------        -------
     #    ^--------a---------
     # Accepts a word with at least one 'a'
-    machine2 = NDFA(machine2_all_states, machine2_init_state, machine2_final_states,
-                    machine2_alphabet, *machine2_transitions)
+    machine2 = Machine(machine2_all_states, machine2_init_state, machine2_final_states,
+                       machine2_alphabet, *machine2_transitions)
 
     print('aaaababaa in machine 2:', 'aaaababaa' in machine2)
     print('abbbaba in machine 2:', 'abbbaba' in machine2)
@@ -74,4 +74,5 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+
+    test()
