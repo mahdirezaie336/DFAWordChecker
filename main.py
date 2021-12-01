@@ -1,4 +1,12 @@
 class Machine:
+    """ This class is a DFA machine in which we can define a regular language.
+        By this machine we can check if a letter is acceptable and exists in
+        a language or no.
+
+        Author: Mahdi Rezaie
+        Email: mahdi.rezaie.336@gmail.com
+        Student ID: 9728040
+        """
 
     def __init__(self, all_states: set['str'],
                  init_state: str,
@@ -17,6 +25,7 @@ class Machine:
             self.transitions[item[0]][item[1]] = item[2]
 
     def __contains__(self, item):
+        """ Checks the acceptability of a word in this machine. """
         if type(item) != str:
             raise TypeError('Type must be "str"')
         current_state = self.init_state
@@ -69,6 +78,7 @@ if __name__ == '__main__':
             transitions2.append((state, letter, next_states[i]))
     machine2 = Machine(set(states2), init_state2, set(final_states2), set(alphabet2), *transitions2)
 
+    # The loop of getting inputs
     while True:
         word = input('Enter a word to check: ')
         print()
